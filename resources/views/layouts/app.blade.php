@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Tasks') · Daymark</title>
+    <title>@yield('title', 'Tasks') · TaskManager</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -38,8 +38,8 @@
         <div class="min-w-0">
             <header class="flex items-center justify-between border-b border-[#e2e5dd] bg-white px-5 py-4 md:hidden">
                 <a href="{{ route('tasks.index') }}" class="flex items-center gap-2.5 font-bold">
-                    <span class="flex size-8 items-center justify-center rounded-lg bg-[#c9ed72] text-xs">D.</span>
-                    Daymark
+                    <span class="flex size-8 items-center justify-center rounded-lg bg-[#c9ed72] text-xs">TM</span>
+                    TaskManager
                 </a>
                 <a href="{{ route('tasks.create') }}" class="rounded-lg bg-[#1d2b24] px-3.5 py-2 text-sm font-semibold text-white">New task</a>
             </header>
