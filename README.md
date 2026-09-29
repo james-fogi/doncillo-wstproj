@@ -23,6 +23,28 @@
 
 
 
+## **How It Works, Step by Step**
+
+A request enters Laravel. The web server sends the request to index.php, which loads Composer and starts the app. app.php configures routing and middleware.
+
+Laravel matches a route. The routes in web.php send / to /tasks. The task routes cover listing, creating, editing, deleting, and changing status. The registered endpoints are standard Laravel resource routes plus a dedicated status route.
+
+The controller handles the action. TaskController.php is the main application logic:
+
+index reads an optional filter and fetches matching tasks.
+create and edit prepare the task form.
+store and update validate submitted fields before saving.
+updateStatus toggles a task between pending and completed.
+destroy deletes a task.
+Tasks are stored in SQLite. Task.php is the Eloquent model. It allows mass assignment of the task fields and casts due_date to a date. The schema is defined in the tasks migration: task name, optional description, status, optional due date, and timestamps.
+
+Overdue status is calculated, not stored. A task is overdue only when it is pending, has a due date, and that date is before today. The model provides isOverdue() for display; the controller uses the equivalent condition when filtering and counting overdue tasks. A task due today is not overdue.
+
+Blade renders the page. The controller passes tasks, counts, and the active filter to the task list view. The shared layout provides the navigation and responsive page structure. The shared form is used by both create and edit pages.
+
+User actions submit normal web forms. Forms include CSRF protection; Laravel’s method spoofing lets HTML forms submit PATCH, PUT, and DELETE actions. On success, the controller redirects back to the task list and flashes a confirmation message. On validation failure, Laravel returns to the form with errors and prior input.
+
+CSS is bundled separately from the page logic. Vite’s config builds the CSS and JavaScript entry points. Tailwind styles are in app.css; app.js is effectively empty, so the current workflows are handled by server-rendered forms rather than custom JavaScript.
 
 ## Requirements
 
